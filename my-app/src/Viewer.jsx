@@ -1,7 +1,6 @@
 import { useParams } from "react-router-dom";
 import './App.css'
 import { useEffect, useState } from "react";
-const BACKEND="http://localhost:5000";
 
 export default function Viewer() {
     const { docId } = useParams()
@@ -12,7 +11,7 @@ export default function Viewer() {
       <h2>Viewing PDF: {docId}</h2>
 
       <img
-        src={`${BACKEND}/api/pdf/${docId}/page/${page}`}
+        src={`/api/pdf/${docId}/page/${page}`}
         style={{ maxWidth: "100%" }}
       />
 
