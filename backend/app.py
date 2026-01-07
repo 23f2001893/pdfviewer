@@ -1,4 +1,4 @@
-from flask import Flask, jsonify,render_template
+from flask import Flask, jsonify,render_template,send_from_directory
 from models import *
 import os
 import fitz
@@ -34,7 +34,13 @@ db.init_app(app)
 with app.app_context():
     db.create_all()
 
+@app.route("/")
+def serve_react():
+    return send_from_directory("static/react", "index.html")
 
+@app.route("/<path:path>")
+def serve_assets(path):
+    return send_from_directory("static/react", path)
 @app.route("/api/pdf/<doc_id>/page/<int:page_no>")
 def serve_page(doc_id,page_no):
     pdf=PDF.query.filter_by(id=doc_id).first()
